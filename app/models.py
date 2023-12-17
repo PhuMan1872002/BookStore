@@ -4,10 +4,9 @@ from sqlalchemy.orm import relationship
 from app import db
 from sqlalchemy import Column,Integer,String,ForeignKey,Float,Boolean,Enum
 class UserRoleEnum(enum.Enum):
-    Employee = 1
-    Customer=2
-    ADMIN = 3
-
+    USER = 1
+    ADMIN = 2
+    EMPLOYEE = 3
 
 
 class User(db.Model, UserMixin):
@@ -17,7 +16,7 @@ class User(db.Model, UserMixin):
     password = Column(String(100), nullable=False)
     avatar = Column(String(100),
                     default='https://res.cloudinary.com/dxxwcby8l/image/upload/v1688179242/hclq65mc6so7vdrbp7hz.jpg')
-    user_role = Column(Enum(UserRoleEnum), default=UserRoleEnum.Customer)
+    user_role = Column(Enum(UserRoleEnum), default=UserRoleEnum.USER)
 
     def __str__(self):
         return self.name
@@ -50,14 +49,14 @@ class Product(db.Model):
 if __name__=='__main__':
     from app import app
     with app.app_context():
-        db.create_all()
+        # db.create_all()
         c1 = Category(name='Sách tâm lý')
         c2 = Category(name='Sách giáo dục')
         c3 = Category(name='Sách tài chính')
         p1 = Product(name='Predictably Irrational', price=210000,quantity=10, author_name='Dan Ariely',category_id=1)
         p2 = Product(name='How Pschycology Works', price=250000,quantity=12,author_name='Jo Hemmings', category_id=1)
-        # # # p3 = Product(name='Cái dũng của thánh nhân', auhor='Nguyễn Duy Cần',price=240000, category_id=2)
-        # # # p4 = Product(name='Toán học cao cấp', auhor='Trần Trung Kiệt',price=290000, category_id=2)
+        # # # # p3 = Product(name='Cái dũng của thánh nhân', auhor='Nguyễn Duy Cần',price=240000, category_id=2)
+        # # # # p4 = Product(name='Toán học cao cấp', auhor='Trần Trung Kiệt',price=290000, category_id=2)
         p5 = Product(name='Finance Wheel', price=25000,quantity=12,author_name='Johnson Nick', category_id=3)
         # db.session.add_all([p1,p2,p5])
         # db.session.commit()
