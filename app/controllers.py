@@ -25,7 +25,7 @@ def login_admin():
 
     return redirect('/admin')
 
-
+@annonymous_user
 def login_my_user():
     if request.method == 'POST':
         username = request.form['username']

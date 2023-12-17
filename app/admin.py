@@ -38,7 +38,7 @@ class LogoutView(AuthenticatedUser):
 
         return redirect('/admin')
 
-admin = Admin(app=app, name='Quản trị bán hàng', template_mode='bootstrap3')
+admin = Admin(app=app, name='Quản trị bán hàng', template_mode='bootstrap4')
 admin.add_view(MyCategoryView(Category, db.session))
 admin.add_view(MyProductView(Product, db.session))
 admin.add_view(StatsView(name='Thông kê báo cáo'))

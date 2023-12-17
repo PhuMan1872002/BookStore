@@ -11,12 +11,14 @@ from app.models import Category, Product, User
 
 app.add_url_rule('/', 'index', controllers.index)
 app.add_url_rule('/products/<int:id>', 'details', controllers.details)
-app.add_url_rule('/admin/login', 'login-admin', controllers.login_admin(), methods=['post'])
+app.add_url_rule('/admin/login', 'login-admin', controllers.login_admin, methods=['post'])
 app.add_url_rule('/login', 'login-user', controllers.login_my_user, methods=['get', 'post'])
 
 
 
-
+@app.route("/cashier")
+def cashier():
+    return render_template("cashier.html")
 
 @login.user_loader
 def get_user_by_id(user_id):

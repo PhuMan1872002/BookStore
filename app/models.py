@@ -49,20 +49,29 @@ class Product(db.Model):
 if __name__=='__main__':
     from app import app
     with app.app_context():
-        # db.create_all()
+        db.create_all()
+
         c1 = Category(name='Sách tâm lý')
         c2 = Category(name='Sách giáo dục')
         c3 = Category(name='Sách tài chính')
+        db.session.add(c1)
+        db.session.add(c2)
+        db.session.add(c3)
+        db.session.commit()
+
         p1 = Product(name='Predictably Irrational', price=210000,quantity=10, author_name='Dan Ariely',category_id=1)
         p2 = Product(name='How Pschycology Works', price=250000,quantity=12,author_name='Jo Hemmings', category_id=1)
-        # # # # p3 = Product(name='Cái dũng của thánh nhân', auhor='Nguyễn Duy Cần',price=240000, category_id=2)
-        # # # # p4 = Product(name='Toán học cao cấp', auhor='Trần Trung Kiệt',price=290000, category_id=2)
+        # # p3 = Product(name='Cái dũng của thánh nhân', auhor_name='Nguyễn Duy Cần',price=240000, category_id=2)
+        # p4 = Product(name='Toán học cao cấp', auhor_name='Trần Trung Kiệt',price=290000, category_id=2)
         p5 = Product(name='Finance Wheel', price=25000,quantity=12,author_name='Johnson Nick', category_id=3)
-        # db.session.add_all([p1,p2,p5])
-        # db.session.commit()
+        db.session.add_all([p1,p2,p5])
+        db.session.commit()
+
         import hashlib
         u = User(name='Admin', username='admin', password=str(hashlib.md5('123456'.encode('utf-8')).hexdigest()),user_role=UserRoleEnum.ADMIN)
         db.session.add(u)
         db.session.commit()
-        # db.session.add_all([c1,c2,c3])
-        # db.session.commit()
+        import hashlib
+        u = User(name='Thu', username='Employee', password=str(hashlib.md5('123456'.encode('utf-8')).hexdigest()),user_role=UserRoleEnum.EMPLOYEE)
+        db.session.add(u)
+        db.session.commit()

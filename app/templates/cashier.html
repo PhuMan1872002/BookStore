@@ -1,0 +1,12 @@
+{% extends 'layout/base.html' %}
+
+{% block content %}
+
+{% if current_user.is_authenticated and current_user.user_role.__eq__("UserRoleEnum.EMPLOYEE") %}
+
+
+<h1>Welcome to cashier page</h1>
+
+{% endif %}
+
+{% endblock %}
